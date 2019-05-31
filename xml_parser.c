@@ -5,8 +5,6 @@
 #include <libxml/xpath.h>
 #include <libxml/xpathInternals.h>
 
-#define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
-
 enum Error {
 	ER_XMLR = -1,
 	ER_XMLEMPTY = -2,
