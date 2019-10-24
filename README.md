@@ -2,7 +2,7 @@
 
 parse an xml file using xpath and store results in an array.
 example using the following xml
-
+```
 <?xml version="1.0" encoding="UTF-8" ?>
 <test_parent>
 	<child id='1'>
@@ -15,8 +15,8 @@ example using the following xml
 		<cvalue>cvalue 3</cvalue>
 	</child>
 </test_parent>
-
-to get all cvalues:
-  cvalues is now stored in result
-  eval_xpath_expr(xml_doc, "//child/cvalue", &result, &count);
-
+```
+to get all cvalues and store them in result:
+```
+eval_xpath_expr(xml_doc, "//child/cvalue", &result, &count);
+```
