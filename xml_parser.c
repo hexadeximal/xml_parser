@@ -63,14 +63,14 @@ int eval_xpath_expr(xmlDoc *xml_doc, const char *xpath_expr, char ***result,int 
 	if(xpath_result) {
 		nodeset = xpath_result->nodesetval;
 
-		if(nodeset->nodeNr == 0) {
-			xmlXPathFreeContext(xpath_context);
-			xmlXPathFreeObject(xpath_result);
-			xmlFreeDoc(xml_doc);
-			return ER_XMLEMPTY;
-		}
 	}
-
+	
+	if(nodeset->nodeNr == 0) {
+		xmlXPathFreeContext(xpath_context);
+		xmlXPathFreeObject(xpath_result);
+		xmlFreeDoc(xml_doc);
+		return ER_XMLEMPTY;
+	}
 	
 	*result = calloc(nodeset->nodeNr, sizeof(char *));
 
@@ -107,9 +107,15 @@ int main(void)
 	xml_doc = NULL;
 	char **result = NULL;
 	int count = 0;
+	int status = 0;
 	read_xml_file(&xml_doc, "test.xml");
 
-	eval_xpath_expr(xml_doc, "//child/cvalue", &result, &count);
+	status = eval_xpath_expr(xml_doc, "//child/cvalue", &result, &count);
+
+	if(status != 0) {
+		fprintf(stderr, "no results\n");
+		return status;
+	}
 
 	xmlFreeDoc(xml_doc);
 
